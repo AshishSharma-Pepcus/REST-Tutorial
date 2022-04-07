@@ -8,7 +8,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,7 +27,6 @@ public class Employee {
 
     @Column(name = "emilId")
     private String emailId;
-
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "employee_id")

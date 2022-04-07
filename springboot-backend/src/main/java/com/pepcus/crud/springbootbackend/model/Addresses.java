@@ -1,7 +1,6 @@
 package com.pepcus.crud.springbootbackend.model;
 
 import lombok.*;
-
 import javax.persistence.*;
 
 

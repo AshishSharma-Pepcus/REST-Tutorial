@@ -23,41 +23,24 @@ public class EmployeeController {
     private AddressRepository addressRepository;
 
     @GetMapping
-    public List<Employee> getAllEmployees(){
+    public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
     }
 
-
     @PostMapping
     public Employee createEmployee(@RequestBody Employee employee) {
-
-//        Employee employee1 = new Employee();
-//
-//       List<Addresses> addressList = new ArrayList<>();
-//       employee.getAddresses().stream().map(a ->addressList.add(a)).collect(Collectors.toList());
-//
-//       employee.setAddresses(addressList);
-//
-//        employee1.setAddresses(addressList);
-//        employee1.setName(employee.getName());
-//        employee1.setPhoneNo(employee.getPhoneNo());
-//        employee1.setEmailId(employee.getEmailId());
-
-        //return employeeRepository.save(employee1);
         return employeeRepository.save(employee);
     }
 
-
     @GetMapping("{id}")
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable  long id){
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable long id) {
         Employee employee = employeeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id:" + id));
         return ResponseEntity.ok(employee);
     }
 
-
     @PutMapping("{id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable long id,@RequestBody Employee employeeDetails) {
+    public ResponseEntity<Employee> updateEmployee(@PathVariable long id, @RequestBody Employee employeeDetails) {
         Employee updateEmployee = employeeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id: " + id));
 
@@ -71,9 +54,8 @@ public class EmployeeController {
         return ResponseEntity.ok(updateEmployee);
     }
 
-
     @DeleteMapping("{id}")
-    public ResponseEntity<HttpStatus> deleteEmployee(@PathVariable long id){
+    public ResponseEntity<HttpStatus> deleteEmployee(@PathVariable long id) {
 
         Employee employee = employeeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id: " + id));
