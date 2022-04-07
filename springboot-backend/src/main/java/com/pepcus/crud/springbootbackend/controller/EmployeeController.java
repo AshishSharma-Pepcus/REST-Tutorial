@@ -2,9 +2,8 @@ package com.pepcus.crud.springbootbackend.controller;
 
 import com.pepcus.crud.springbootbackend.exception.ResourceNotFoundException;
 import com.pepcus.crud.springbootbackend.model.Employee;
+import com.pepcus.crud.springbootbackend.repository.AddressRepository;
 import com.pepcus.crud.springbootbackend.repository.EmployeeRepository;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +13,14 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api/v1/employees")
+@RequestMapping({"/api/v1/employees", "/api/v1/addresses", "/api/v1/employees_address"})
 public class EmployeeController {
 
     @Autowired
     private EmployeeRepository employeeRepository;
+
+    @Autowired
+    private AddressRepository addressRepository;
 
     @GetMapping
     public List<Employee> getAllEmployees(){
@@ -28,6 +30,20 @@ public class EmployeeController {
 
     @PostMapping
     public Employee createEmployee(@RequestBody Employee employee) {
+
+//        Employee employee1 = new Employee();
+//
+//       List<Addresses> addressList = new ArrayList<>();
+//       employee.getAddresses().stream().map(a ->addressList.add(a)).collect(Collectors.toList());
+//
+//       employee.setAddresses(addressList);
+//
+//        employee1.setAddresses(addressList);
+//        employee1.setName(employee.getName());
+//        employee1.setPhoneNo(employee.getPhoneNo());
+//        employee1.setEmailId(employee.getEmailId());
+
+        //return employeeRepository.save(employee1);
         return employeeRepository.save(employee);
     }
 
@@ -48,7 +64,7 @@ public class EmployeeController {
         updateEmployee.setName(employeeDetails.getName());
         updateEmployee.setPhoneNo(employeeDetails.getPhoneNo());
         updateEmployee.setEmailId(employeeDetails.getEmailId());
-        updateEmployee.setAddress(employeeDetails.getAddress());
+        updateEmployee.setAddresses(employeeDetails.getAddresses());
 
         employeeRepository.save(updateEmployee);
 

@@ -1,14 +1,15 @@
 package com.pepcus.crud.springbootbackend.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
-@Getter
-@Setter
+
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -19,15 +20,17 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "Name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "Phone_No")
+    @Column(name = "phoneNo")
     private String phoneNo;
 
-    @Column(name = "email_id")
+    @Column(name = "emilId")
     private String emailId;
 
-    @Column(name = "Address")
-    private String address;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "employee_id")
+    private List<Addresses> addresses = new ArrayList<>();
 }
