@@ -27,8 +27,8 @@ public class Addresses {
     @Column(name = "country")
     private String country;
 
-    @ManyToOne
-    private Employee employee;
+//    @ManyToOne
+//    private Employee employee;
 
 
 
