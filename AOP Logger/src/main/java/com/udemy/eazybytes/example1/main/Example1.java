@@ -10,8 +10,12 @@ public class Example1 {
         var context = new AnnotationConfigApplicationContext(ProjectConfig.class);
         Person person = context.getBean(Person.class);
         Song song = context.getBean(Song.class);
-        person.getVehicle().getVehicleServices().playMusic(true,song);
+
+
+        person.getVehicle().getVehicleServices().playMusic(true, song);
         person.getVehicle().getVehicleServices().moveVehicle(true);
+        person.getVehicle().getVehicleServices().stopVehicle();
+
 
     }
 }

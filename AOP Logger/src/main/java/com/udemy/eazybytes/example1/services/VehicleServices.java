@@ -13,18 +13,22 @@ public class VehicleServices {
     @Autowired
     private Tyres tyres;
 
-    public void playMusic(boolean vehicleStarted, Song song) {
+  //  @LogAspect
+    public String playMusic(boolean vehicleStarted, Song song) {
+       // throw new NumberFormatException("Null pointer exception inserted");
         String music = speakers.makeSound(song);
-        System.out.println(music);
+        return music;
     }
 
-    public void moveVehicle(boolean vehicleStarted) {
+  //  @LogAspect
+    public String moveVehicle(boolean vehicleStarted) {
         String rotate = tyres.rotate();
-        System.out.println(rotate);
+        return rotate;
     }
 
-    public void stopVehicle() {
+  //  @LogAspect
+    public String stopVehicle() {
         String stop =  tyres.applyBreak();
-        System.out.println(stop);
+        return stop;
     }
 }
