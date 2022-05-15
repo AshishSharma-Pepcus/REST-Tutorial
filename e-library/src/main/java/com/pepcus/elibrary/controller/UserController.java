@@ -5,7 +5,6 @@ import com.pepcus.elibrary.model.User;
 import com.pepcus.elibrary.repository.UserRepository;
 import com.pepcus.elibrary.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,10 +29,7 @@ public class UserController {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User does not exist with id: " + id));
 
-        userRepository.delete(user);
-
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("User with id-" +id+" deregistered " +
-                "successfully");
+        return userService.deRegisterUser(user,id);
 
     }
 
