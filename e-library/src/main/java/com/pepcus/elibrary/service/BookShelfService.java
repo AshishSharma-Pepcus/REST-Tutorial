@@ -18,8 +18,8 @@ public class BookShelfService {
         return bookShelfRepository.save(bookShelf);
     }
 
-    public BookShelf addBooksToShelf(Integer id, List<Book> books) {
-                BookShelf bookShelf = bookShelfRepository.getById(id);
+    public BookShelf addBooksToShelf(Integer shelfId, List<Book> books) {
+                BookShelf bookShelf = bookShelfRepository.getById(shelfId);
         List<Book> existingBookList = bookShelf.getBooks();
         for (Book book : books ) {
             existingBookList.add(book);

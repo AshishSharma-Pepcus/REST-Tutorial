@@ -27,23 +27,23 @@ public class UserController {
         return userService.saveUser(user);
     }
 
-    @DeleteMapping("{id}")
-    public ResponseEntity<String> deleteUser(@PathVariable Integer id) {
+    @DeleteMapping("{userId}")
+    public ResponseEntity<String> deleteUser(@PathVariable Integer userId) {
 
-        User user = userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("User does not exist with id: " + id));
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User does not exist with id: " + userId));
 
-        return userService.deRegisterUser(user,id);
+        return userService.deRegisterUser(user,userId);
     }
 
-    @PatchMapping("book-issue/{uID}/{bID}")
-    public ResponseEntity<String> issueBook(@PathVariable Integer uID, @PathVariable Integer bID) {
-        return userService.issueABook(uID,bID);
+    @PatchMapping("book-issue/{userId}/{bookId}")
+    public ResponseEntity<String> issueBook(@PathVariable Integer userId, @PathVariable Integer bookId) {
+        return userService.issueABook(userId,bookId);
     }
 
-    @PatchMapping("book-return/{uID}/{bID}")
-    public ResponseEntity<String> returnBook(@PathVariable Integer uID, @PathVariable Integer bID) {
-        return userService.returnABook(uID,bID);
+    @PatchMapping("book-return/{userId}/{bookId}")
+    public ResponseEntity<String> returnBook(@PathVariable Integer userId, @PathVariable Integer bookId) {
+        return userService.returnABook(userId,bookId);
     }
 }
 

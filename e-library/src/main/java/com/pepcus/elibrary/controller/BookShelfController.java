@@ -24,9 +24,9 @@ public class BookShelfController {
     }
 
 
-    @PatchMapping("addBooks/{id}")
-    public BookShelf addBook(@PathVariable Integer id, @RequestBody List<Book> books) {
-        return bookShelfService.addBooksToShelf(id,books);
+    @PatchMapping("addBooks/{shelfId}")
+    public BookShelf addBook(@PathVariable Integer shelfId, @RequestBody List<Book> books) {
+        return bookShelfService.addBooksToShelf(shelfId,books);
     }
 
 }

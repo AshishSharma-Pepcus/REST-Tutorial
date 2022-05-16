@@ -23,48 +23,48 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public ResponseEntity<String> deRegisterUser(User user, Integer id) {
+    public ResponseEntity<String> deRegisterUser(User user, Integer userId) {
         //Why the if condition was not working with null instead of isEmpty
         if (user.getBookIssuedList().isEmpty()) {
         userRepository.delete(user);
-         return ResponseEntity.status(HttpStatus.OK).body("User with id-" +id+" deregistered " +
+         return ResponseEntity.status(HttpStatus.OK).body("User with id-" +userId+" deregistered " +
                     "successfully");
         }
         else {
-             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("User with id-" +id+" can't" +
+             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("User with id-" +userId+" can't" +
                     " be deleted, first return the issued books");
         }
     }
 
-    public ResponseEntity<String> issueABook(Integer uID, Integer bID) {
-                Book book = bookRepository.findById(bID)
-                .orElseThrow(() -> new ResourceNotFoundException("Book does not exist with id: " + bID));
+    public ResponseEntity<String> issueABook(Integer userId, Integer bookId) {
+                Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new ResourceNotFoundException("Book does not exist with id: " + bookId));
 
-        User user = userRepository.findById(uID)
-                .orElseThrow(() -> new ResourceNotFoundException("User does not exist with id: " + uID));
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User does not exist with id: " + userId));
 
         user.getBookIssuedList().add(book);
         userRepository.saveAndFlush(user);
 
         return ResponseEntity.status(HttpStatus.OK).body(book.getBookName()+" issued successfully to"
-                               +" the user "+uID);
+                               +" the user "+userId);
     }
 
-    public ResponseEntity<String> returnABook(Integer uID, Integer bID) {
-        User user = userRepository.findById(uID)
-                .orElseThrow(() -> new ResourceNotFoundException("User does not exist with id: " + uID));
+    public ResponseEntity<String> returnABook(Integer userId, Integer bookId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User does not exist with id: " + userId));
 
-        Book book = bookRepository.findById(bID)
-                .orElseThrow(() -> new ResourceNotFoundException("Book does not exist with id: " + bID));
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new ResourceNotFoundException("Book does not exist with id: " + bookId));
 
         if (user.getBookIssuedList().contains(book)) {
             user.getBookIssuedList().remove(book);
             userRepository.saveAndFlush(user);
             return ResponseEntity.status(HttpStatus.OK).body(book.getBookName()+" returned successfully by"
-                    +" the user "+uID);
+                    +" the user "+userId);
         }
         else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(book.getBookName()+ " not with the user "+uID);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(book.getBookName()+ " not with the user "+userId);
         }
     }
 }
