@@ -67,6 +67,4 @@ public class UserService {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(book.getBookName()+ " not with the user "+uID);
         }
     }
-
-
 }
