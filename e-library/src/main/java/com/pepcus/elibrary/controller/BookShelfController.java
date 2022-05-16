@@ -24,14 +24,10 @@ public class BookShelfController {
     }
 
 
-    @PatchMapping("{id}/{userId}")
+    @PatchMapping("addBooks/{id}")
     public BookShelf addBook(@PathVariable Integer id, @RequestBody List<Book> books) {
-        BookShelf bookShelf = bookShelfRepository.getById(id);
-        List<Book> existingBookList = bookShelf.getBooks();
-        for (Book book : books ) {
-            existingBookList.add(book);
-        }
-        return bookShelfRepository.save(bookShelf);
+        return bookShelfService.addBooksToShelf(id,books);
+
     }
 
 }
