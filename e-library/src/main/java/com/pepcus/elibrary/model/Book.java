@@ -27,4 +27,11 @@ public class Book {
     @Column(name = "deletedDate")
     private Date deletedDate;
 
+    public Book(Integer bookId, String bookName, Date addedDate, Date modifiedDate, Date deletedDate) {
+        this.bookId = bookId;
+        this.bookName = bookName;
+        this.addedDate = addedDate;
+        this.modifiedDate = modifiedDate;
+        this.deletedDate = deletedDate;
+    }
 }

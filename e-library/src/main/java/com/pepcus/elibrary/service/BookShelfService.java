@@ -14,6 +14,10 @@ public class BookShelfService {
     @Autowired
     private BookShelfRepository bookShelfRepository;
 
+    public BookShelfService(BookShelfRepository bookShelfRepository) {
+        this.bookShelfRepository = bookShelfRepository;
+    }
+
     public BookShelf saveBookShelf(BookShelf bookShelf){
         return bookShelfRepository.save(bookShelf);
     }

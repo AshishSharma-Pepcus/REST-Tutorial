@@ -23,5 +23,9 @@ public class BookShelf {
     @JoinColumn
     private List<Book> books = new ArrayList<>();
 
-
+    public BookShelf(Integer shelfId, String shelfName, List<Book> books) {
+        this.shelfId = shelfId;
+        this.shelfName = shelfName;
+        this.books = books;
+    }
 }
